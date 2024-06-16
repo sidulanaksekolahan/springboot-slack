@@ -31,8 +31,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
-        run: docker build -t mirfanduri/springboot-slack:latest .
+#      - name: Build Docker image
+#        run: docker build -t mirfanduri/springboot-slack:latest .
 
-      - name: Push Docker image to Docker Hub
-        run: docker push mirfanduri/springboot-slack:latest
+      - name: Pull Docker image
+        run: docker pull mirfanduri/springboot-slack:latest
+
+#      - name: Push Docker image to Docker Hub
+#        run: docker push mirfanduri/springboot-slack:latest
