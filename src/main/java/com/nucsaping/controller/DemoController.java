@@ -14,6 +14,7 @@ public class DemoController {
     @GetMapping
     public String hello() {
         return "Hello there, the time is " + LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS"));
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS"))
+                + ". This project uses github action!";
     }
 }

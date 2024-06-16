@@ -46,6 +46,3 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
-
-      - name: Pull Docker image
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
