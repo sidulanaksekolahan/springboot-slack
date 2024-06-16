@@ -25,17 +25,33 @@ jobs:
       - name: Build with Maven
         run: ./mvnw clean package
 
+      - name: build the docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: false
+          tags: ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: push the docker image to docker hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
+
 #      - name: Build Docker image
 #        run: docker build -t mirfanduri/springboot-slack:latest .
 
-      - name: Pull Docker image
-        run: docker pull mirfanduri/springboot-slack:latest
+#      - name: Pull Docker image
+#        run: docker pull mirfanduri/springboot-slack:latest
 
 #      - name: Push Docker image to Docker Hub
 #        run: docker push mirfanduri/springboot-slack:latest
