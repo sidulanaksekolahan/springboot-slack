@@ -47,11 +47,5 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
 
-#      - name: Build Docker image
-#        run: docker build -t mirfanduri/springboot-slack:latest .
-
-#      - name: Pull Docker image
-#        run: docker pull mirfanduri/springboot-slack:latest
-
-#      - name: Push Docker image to Docker Hub
-#        run: docker push mirfanduri/springboot-slack:latest
+      - name: Pull Docker image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-slack:latest
