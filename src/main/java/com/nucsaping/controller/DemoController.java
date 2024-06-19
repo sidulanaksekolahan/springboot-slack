@@ -13,6 +13,6 @@ public class DemoController {
 
     @GetMapping
     public String hello() {
-        return "Test!!!";
+        return "Fixing Dockerfile!";
     }
 }
