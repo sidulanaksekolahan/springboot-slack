@@ -10,6 +10,6 @@ public class DemoController {
 
     @GetMapping
     public String hello() {
-        return "Fixing Dockerfile!!! This should work!!!";
+        return "COPY target/*.jar .";
     }
 }
