@@ -10,6 +10,6 @@ public class DemoController {
 
     @GetMapping
     public String hello() {
-        return "COPY target/*.jar .";
+        return "Rename workflows";
     }
 }
