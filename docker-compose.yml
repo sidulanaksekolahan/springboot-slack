@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - mssql-data:/var/opt/mssql
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: /usr/local/bin/entrypoint.sh
+
+  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: mirfanduri/springboot-githubaction-slack:v1
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mssql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://mssql:1433;encrypt=true;trustServerCertificate=true;databaseName=demo
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_MSSQL_PASSWORD}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  mssql-data:
